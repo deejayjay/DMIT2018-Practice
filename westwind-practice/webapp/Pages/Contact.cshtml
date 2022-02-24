@@ -1,0 +1,149 @@
+﻿@page
+@model webapp.Pages.ContactModel
+@{
+}
+
+<style>
+	.validation {
+		font-weight: bold;
+	}
+
+	.validation-success {
+		color: green;
+	}
+
+	.validation-error {
+		color: red;
+	}
+</style>
+
+<div class="row g-3">
+	<h5>Form Elements</h5>
+	<p>The following page shows examples of form elements.</p>
+
+	@if(!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+	{
+		<p class="validation validation-error">@Model.ErrorMessage</p>
+	}
+
+	@if(!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+	{
+		<p class="validation validation-success">@Model.SuccessMessage</p>
+	}
+
+	<form method="post">
+		<div class="row g-3 mb-3">
+			<div class="col-md-4">
+				<input type="text" class="form-control" placeholder="enter text 1" name="text1" value="@Model.Text1" />
+			</div>
+			<div class="col-md-4">
+				<input type="text" class="form-control" placeholder="enter text 2" name="Text2" value="@Model.Text2" />
+			</div>
+			<div class="col-md-4">
+				<input asp-for="Text3" class="form-control" placeholder="enter text 3" />
+			</div>
+		</div>
+		<div class="row g-3 mb-3">
+			<div class="col-md-4">
+				<input type="number" class="form-control" placeholder="enter number 1" name="number1" value="@Model.Number1" />
+			</div>
+			<div class="col-md-4">
+				<input type="number" class="form-control" placeholder="enter number 2" name="Number2" value="@Model.Number2" />
+			</div>
+			<div class="col-md-4">
+				<input asp-for="Number3" class="form-control" placeholder="enter number 3" />
+			</div>
+		</div>
+		<div class="row g-3 mb-3">
+			<div class="col-md-4">
+				<input type="email" class="form-control" placeholder="enter your email" name="Email" value="@Model.Email" />
+			</div>
+			<div class="col-md-4">
+				@if (Model.MyDate != DateTime.MinValue)
+				{
+					<input type="date" class="form-control" id="date" name="MyDate" value='@Model.MyDate.ToString("yyyy-MM-dd")' />
+				}
+				else
+				{
+					<input type="date" class="form-control" id="date" name="MyDate" value="" />
+				}
+			</div>
+			<div class="col-md-4">
+				<select class="form-select" name="SelectedSubjectId">
+					@for (var index = 0; index < Model.SelectListOfSubjects.Count; index++)
+					{
+						if (Model.SelectedSubjectId == index)
+						{
+							<option value="@index" selected>@Model.SelectListOfSubjects[index]</option>
+						}
+						else
+						{
+							<option value="@index">@Model.SelectListOfSubjects[index]</option>
+						}
+					}
+				</select>
+			</div>
+		</div>
+		<div class="row g-3 mb-3">
+			<div class="col-md-6">
+				<textarea class="form-control" placeholder="enter your message" name="MessageBody">@Model.MessageBody</textarea>
+			</div>
+		</div>
+		<div class="row g-3 mb-3">
+			<div class="col-md-4">
+				<div class="form-check">
+					<label class="form-check-label" for="CheckBox">CheckBox:</label>
+					<input type="checkbox" class="form-check-input" id="CheckBox" name="CheckBox" checked="@Model.CheckBox" />
+				</div>
+			</div>
+			<div class="col-md-4">
+				<span>Radio Button Group:</span>
+				<div class="form-check">
+					@if (Model.Radio == "email")
+					{
+						<input type="radio" class="form-check-input" id="radio1" name="Radio" value="email" checked />
+					}
+					else
+					{
+						<input type="radio" class="form-check-input" id="radio1" name="Radio" value="email" />
+					}
+					<label for="radio1" class="form-check-label">Email</label>
+				</div>
+				<div class="form-check">
+					@if (Model.Radio == "phone")
+					{
+						<input type="radio" class="form-check-input" id="radio2" name="Radio" value="phone" checked />
+					}
+					else
+					{
+						<input type="radio" class="form-check-input" id="radio2" name="Radio" value="phone" />
+					}
+					<label for="radio2" class="form-check-label">Phone</label>
+				</div>
+				<div class="form-check">
+					@if (Model.Radio == "mail")
+					{
+						<input type="radio" class="form-check-input" id="radio3" name="Radio" value="mail" checked />
+					}
+					else
+					{
+						<input type="radio" class="form-check-input" id="radio3" name="Radio" value="mail" />
+					}
+					<label for="radio3" class="form-check-label">Mail</label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<label>Range:</label>
+				<input type="range" class="form-range" name="Range" value="@Model.Range" />
+			</div>
+		</div>
+
+		<div class="row g-3 mb-3">
+			<div class="col-md-4">
+				<button type="submit" class="btn btn-dark" name="ButtonPressed" value="Submit">Submit</button>
+				<button type="submit" class="btn btn-dark" name="ButtonPressed" value="Clear">Clear</button>
+			</div>
+		</div>
+	</form>
+
+</div>
