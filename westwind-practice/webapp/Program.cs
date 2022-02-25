@@ -1,7 +1,18 @@
+using BLL;
+using DAL;
+using Microsoft.EntityFrameworkCore;
+using webclasslib;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// 1. Get the connection string from appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("WWDB");
+
+// 2. Call the Backend Extension Method to register the Context and DbVersionServices classes
+builder.Services.AddBackendDependencies(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

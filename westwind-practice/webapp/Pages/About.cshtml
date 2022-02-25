@@ -1,0 +1,39 @@
+﻿@page
+@model webapp.Pages.AboutModel
+@{
+}
+
+<style>
+	.validation {
+		font-weight: bold;
+	}
+
+	.validation-success {
+		color: green;
+	}
+
+	.validation-error {
+		color: red;
+	}
+</style>
+
+<h5>About the Database Used for This Site</h5>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+	<p class="validation validation-error">@Model.ErrorMessage</p>
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+{
+	<p class="validation validation-success">@Model.SuccessMessage</p>
+}
+
+<table class="table table-hover">
+	<tr>
+		<th>Database Version</th>
+	</tr>
+	<tr>
+		<td>@Model.BuildVersion</td>
+	</tr>
+</table>
