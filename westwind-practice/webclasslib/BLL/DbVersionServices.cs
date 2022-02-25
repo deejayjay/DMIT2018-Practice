@@ -1,14 +1,9 @@
 ﻿using DAL;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class DbVersionServices
+	public class DbVersionServices
     {
         private readonly Context _context;
         public DbVersionServices(Context context)
