@@ -15,6 +15,7 @@ namespace BLL
                 throw new ArgumentNullException();
             _context = context;
         }
+
         #endregion
 
         #region Queries
